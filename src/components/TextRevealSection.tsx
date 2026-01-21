@@ -105,7 +105,7 @@ const TextRevealSection = () => {
               We&apos;re revolutionizing healthcare by bridging the gap between patients and medical professionals.
             </p>
             <p className="text-lg md:text-xl lg:text-2xl text-foreground/80 leading-relaxed">
-              Our platform enables seamless virtual consultations, secure health record management, and personalized care pathways that transform how people access medical expertise.
+              Our platform enable seamless virtual consultations, secure health record management, and personalized care pathways that transform how people access medical expertise.
             </p>
             <ul className="space-y-3 mt-8">
               <li className="flex items-start gap-3">
