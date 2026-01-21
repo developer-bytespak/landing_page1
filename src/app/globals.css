@@ -1,0 +1,467 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 20% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 10%;
+
+    /* Teal primary color - Healthcare aesthetic */
+    --primary: 168 76% 42%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 168 76% 92%;
+    --primary-dark: 168 76% 32%;
+
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 220 20% 10%;
+
+    --muted: 210 15% 96%;
+    --muted-foreground: 215 15% 55%;
+    
+    /* Special gray for text reveal animation */
+    --text-reveal-start: 220 10% 80%;
+    --text-reveal-end: 220 20% 10%;
+
+    --accent: 168 76% 42%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 168 76% 42%;
+
+    --radius: 0.75rem;
+
+    /* Custom healthcare design tokens */
+    --hero-gradient: linear-gradient(180deg, hsl(168 76% 97%) 0%, hsl(0 0% 100%) 100%);
+    --card-shadow: 0 4px 40px -12px hsl(220 20% 10% / 0.12);
+    --card-shadow-hover: 0 8px 50px -12px hsl(168 76% 42% / 0.2);
+    --button-shadow: 0 4px 14px 0 hsl(168 76% 42% / 0.3);
+    
+    /* Stacking card shadow */
+    --stacking-shadow: 0 -20px 60px -20px hsl(220 20% 10% / 0.25);
+    
+    /* Footer gradient */
+    --footer-bg: 168 76% 42%;
+    
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 168 76% 42%;
+  }
+
+  .dark {
+    --background: 220 20% 6%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 20% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 20% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 168 76% 50%;
+    --primary-foreground: 220 20% 6%;
+
+    --secondary: 220 20% 12%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 220 20% 12%;
+    --muted-foreground: 215 15% 60%;
+
+    --accent: 168 76% 50%;
+    --accent-foreground: 220 20% 6%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 20% 15%;
+    --input: 220 20% 15%;
+    --ring: 168 76% 50%;
+    
+    --sidebar-background: 220 20% 6%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 168 76% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 20% 12%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 220 20% 15%;
+    --sidebar-ring: 168 76% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Prevent hover color changes */
+  .no-hover {
+    color: inherit;
+  }
+
+  .no-hover:hover {
+    color: inherit;
+  }
+}
+
+@layer components {
+  /* ============================================
+     STACKING CARDS LAYOUT - Core sticky system
+     ============================================ */
+  .stacking-container {
+    @apply relative overflow-x-hidden;
+  }
+
+  .stacking-card {
+    @apply relative min-h-screen w-full overflow-hidden;
+    will-change: auto;
+  }
+
+  /* Card 1: Hero - Base layer */
+  .stacking-card-1 {
+    z-index: 1;
+    background: var(--hero-gradient);
+  }
+
+  /* Card 2: Text Reveal - slides over Hero */
+  .stacking-card-2 {
+    z-index: 2;
+    @apply rounded-t-[40px];
+    box-shadow: none;
+  }
+
+  /* Card 3: For Doctors - slides over Text */
+  .stacking-card-3 {
+    z-index: 3;
+    @apply rounded-t-[40px];
+    box-shadow: none;
+  }
+
+  /* Card 4: For Patients - slides over Doctors */
+  .stacking-card-4 {
+    z-index: 4;
+    @apply rounded-t-[40px];
+    box-shadow: none;
+  }
+
+  /* Card 5: Process Steps - slides over Patients */
+  .stacking-card-5 {
+    z-index: 5;
+    @apply rounded-t-[40px];
+    box-shadow: none;
+  }
+
+  /* Card 6: Footer/Waitlist - slides over Process */
+  .stacking-card-6 {
+    z-index: 6;
+    @apply rounded-t-[40px];
+    box-shadow: none;
+  }
+
+  /* Hero section styles */
+  .hero-section {
+    background: var(--hero-gradient);
+  }
+
+  /* Feature card styles */
+  .feature-card {
+    @apply bg-card rounded-3xl overflow-hidden;
+    box-shadow: var(--card-shadow);
+    transition: box-shadow 0.4s ease, transform 0.4s ease;
+  }
+
+  .feature-card:hover {
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  /* 3D Animated Cards */
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  .card-3d:hover {
+    box-shadow: 0 20px 60px -10px hsl(168 76% 42% / 0.3);
+  }
+
+  /* Flip Card Effect */
+  .flip-card-container {
+    width: 350px;
+    height: 450px;
+    perspective: 900px;
+  }
+
+  .flip-card {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    transition: transform 1500ms;
+    transform-style: preserve-3d;
+    border-radius: 2rem;
+  }
+
+  .flip-card-container:hover > .flip-card {
+    cursor: pointer;
+    transform: rotateY(180deg) rotateZ(180deg);
+  }
+
+  .flip-card-front, .flip-card-back {
+    height: 100%;
+    width: 100%;
+    border-radius: 2rem;
+    position: absolute;
+    box-shadow: 0 0 10px 2px rgba(50, 50, 50, 0.25);
+    backface-visibility: hidden;
+    overflow: hidden;
+  }
+
+  .flip-card-front {
+    background-color: hsl(var(--card));
+    color: hsl(var(--foreground));
+  }
+
+  .flip-card-back {
+    background: linear-gradient(-135deg, hsl(168 76% 42%), hsl(60 100% 51%));
+    color: white;
+    transform: rotateY(180deg) rotateZ(180deg);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .back-heading, .front-heading {
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  /* Parallax image container */
+  .parallax-container {
+    @apply overflow-hidden rounded-2xl;
+  }
+
+  .parallax-image {
+    @apply w-full h-full object-cover;
+    transform: scale(1.2);
+    will-change: transform;
+  }
+
+  /* Text reveal animation classes */
+  .text-reveal-word {
+    color: hsl(var(--text-reveal-start));
+    transition: color 0.1s ease-out;
+  }
+
+  .text-reveal-word.revealed {
+    color: hsl(var(--text-reveal-end));
+  }
+
+  /* Process step circle */
+  .process-circle {
+    @apply w-32 h-32 md:w-40 md:h-40 rounded-full bg-primary/5 flex items-center justify-center;
+    @apply border-0;
+    transition: all 0.4s ease;
+  }
+
+  .process-circle:hover {
+    @apply bg-primary/10;
+    transform: scale(1.05);
+  }
+
+  /* Footer section */
+  .footer-section {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  /* Custom button styles */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-8 py-4 rounded-full font-semibold;
+    @apply transition-all duration-300 ease-out;
+    box-shadow: 0 4px 14px 0 hsl(168 76% 42% / 0.3);
+  }
+
+  .btn-primary:hover {
+    background-color: hsl(168 76% 32%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 hsl(168 76% 42% / 0.4);
+  }
+
+  .btn-outline {
+    @apply border-0 text-foreground px-8 py-4 rounded-full font-semibold;
+    @apply bg-transparent transition-all duration-300 ease-out;
+  }
+
+  .btn-outline:hover {
+    @apply bg-foreground/5;
+    transform: translateY(-2px);
+  }
+
+  /* Light button for dark backgrounds */
+  .btn-light {
+    @apply bg-primary-foreground text-primary px-8 py-4 rounded-full font-semibold;
+    @apply transition-all duration-300 ease-out;
+    box-shadow: 0 4px 14px 0 hsl(0 0% 100% / 0.3);
+  }
+
+  .btn-light:hover {
+    @apply bg-primary-foreground/90;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 hsl(0 0% 100% / 0.4);
+  }
+
+  /* Avatar stack */
+  .avatar-stack {
+    @apply flex -space-x-3;
+  }
+
+  .avatar-stack img {
+    @apply w-10 h-10 rounded-full border-0 object-cover;
+    @apply transition-transform duration-200;
+  }
+
+  .avatar-stack img:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Inline images in text */
+  .inline-image {
+    @apply inline-block w-12 h-12 rounded-full object-cover align-middle mx-1;
+    @apply border-0;
+  }
+
+  /* Form input styles */
+  .waitlist-input {
+    @apply w-full px-6 py-4 rounded-full border-0;
+    @apply bg-background text-foreground placeholder:text-muted-foreground;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/20;
+    @apply transition-all duration-200;
+  }
+
+  /* Dark background input */
+  .waitlist-input-dark {
+    @apply w-full px-6 py-4 rounded-full;
+    @apply bg-primary-foreground/10 text-primary-foreground placeholder:text-primary-foreground/50;
+    @apply border-0;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-foreground/30;
+    @apply transition-all duration-200;
+  }
+}
+
+@layer utilities {
+  /* GPU acceleration for smooth animations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Smooth scroll snap */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom clip paths */
+  .clip-circle {
+    clip-path: circle(50% at 50% 50%);
+  }
+}
+
+/* Hero section reveal animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0 0 0% 0);
+  }
+}
+
+/* Continuous scroll animation for cards */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+/* Glowing border animation for doctor cards */
+.doctor-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.doctor-card::before {
+  content: '';
+  position: absolute;
+  width: 100px;
+  background-image: linear-gradient(180deg, hsl(168 76% 42%), hsl(186 100% 69%));
+  height: 130%;
+  animation: rotBGimg 3s linear infinite;
+  transition: all 0.2s linear;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+@keyframes rotBGimg {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.doctor-card::after {
+  content: '';
+  position: absolute;
+  background: inherit;
+  inset: 2px;
+  border-radius: 15px;
+  z-index: 1;
+}
+
+.doctor-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.doctor-card:hover::before {
+  animation: rotBGimg 2s linear infinite;
+}
