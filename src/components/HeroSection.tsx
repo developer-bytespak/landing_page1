@@ -56,7 +56,7 @@ const HeroSection = () => {
         <div className="text-center space-y-6 max-w-3xl">
           <h1 className="hero-text text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight tracking-tight">
             Smarter Healthcare <br />
-            <span className="text-primary">Excellence</span>
+            <span className="text-primary">Excellencess</span>
           </h1>
 
           <p className="hero-text text-sm md:text-base text-white/80 max-w-2xl mx-auto leading-relaxed font-medium">
